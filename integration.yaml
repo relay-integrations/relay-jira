@@ -5,7 +5,7 @@ apiVersion: integration/v1
 kind: Integration
 
 # The integration slug. Required.
-name: atlassian
+name: jira-server
 
 # The release channel for this integration. One of alpha, beta, rc or stable.
 # Optional. Defaults to stable.
@@ -22,11 +22,11 @@ version: v20200408
 
 # The shortest possible accurate description of this integration. Required. May
 # just be the name of the service.
-summary: Atlassian
+summary: Jira Server
 
 # A paragraph or two describing what this integration does. Optional. Markdown.
 description: |
-    Integration with Atlassian products, mostly JIRA.
+    Integration with Atlassian's JIRA Server.
 
 # License information. Optional. If not specified, this integration is assumed
 # to be unlicensed proprietary code. Otherwise, must be a valid SPDX License

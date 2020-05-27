@@ -1,6 +1,6 @@
-# Atlassian integration
+# Jira Server integration
 
-Integration with Atlassian for Puppet Relay.
+Integration with Jira Server for Puppet Relay.
 
 ## External requirements
 
