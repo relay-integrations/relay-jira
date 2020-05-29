@@ -16,16 +16,29 @@ import (
 
 func TestCreateIssueFromSpec(t *testing.T) {
 	tcs := []struct {
-		Name string
-		File string
+		Name          string
+		File          string
+		ExpectedError error
 	}{
 		{
-			Name: "Jira Server Issue Create: Bug",
-			File: "fixtures/jira-server-issue-create-bug.yaml",
+			Name:          "Jira Server Issue Create: Bug",
+			File:          "fixtures/jira-server-issue-create-bug.yaml",
+			ExpectedError: nil,
 		},
 		{
-			Name: "Jira Server Issue Create: Epic",
-			File: "fixtures/jira-server-issue-create-epic.yaml",
+			Name:          "Jira Server Issue Create: Epic",
+			File:          "fixtures/jira-server-issue-create-epic.yaml",
+			ExpectedError: nil,
+		},
+		{
+			Name:          "Jira Server Issue Create: Fields Undefined",
+			File:          "fixtures/jira-server-issue-create-fields-undefined.yaml",
+			ExpectedError: issue.ErrNoIssueFieldsAreDefined,
+		},
+		{
+			Name:          "Jira Server Invalid Auth",
+			File:          "fixtures/jira-server-invalid-auth.yaml",
+			ExpectedError: issue.ErrInvalidAuth,
 		},
 	}
 	for _, test := range tcs {
@@ -38,12 +51,14 @@ func TestCreateIssueFromSpec(t *testing.T) {
 			}
 
 			issue, err := issue.CreateIssue(spec)
-			require.NoError(t, err)
-			require.NotNil(t, issue)
-			require.NotEmpty(t, issue.Key)
+			require.Equal(t, test.ExpectedError, err)
+			if test.ExpectedError == nil {
+				require.NotNil(t, issue)
+				require.NotEmpty(t, issue.Key)
 
-			if issue != nil {
-				t.Log(fmt.Sprintf("Created issue %v", issue.Key))
+				if issue != nil {
+					t.Log(fmt.Sprintf("Created issue %v", issue.Key))
+				}
 			}
 		})
 	}

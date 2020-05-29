@@ -4,12 +4,15 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 
 	"github.com/andygrunwald/go-jira"
 )
 
 var (
+	ErrInvalidAuth                 = errors.New("Invalid authentication")
 	ErrNoIssueFieldsAreDefined     = errors.New("No issue fields are defined")
+	ErrNoIssueKeyIsDefined         = errors.New("No issue key is defined")
 	ErrNoIssueStatusFieldIsDefined = errors.New("No issue status field is defined")
 )
 
@@ -43,6 +46,16 @@ type Spec struct {
 }
 
 func TransitionIssue(spec Spec) error {
+	if spec.Issue.Key == "" {
+		return ErrNoIssueKeyIsDefined
+	}
+	if spec.Issue.Fields == nil {
+		return ErrNoIssueFieldsAreDefined
+	}
+	if spec.Issue.Fields.Status == nil {
+		return ErrNoIssueStatusFieldIsDefined
+	}
+
 	tp := jira.BasicAuthTransport{
 		Username: spec.Connection.Username,
 		Password: spec.Connection.Password,
@@ -55,21 +68,7 @@ func TransitionIssue(spec Spec) error {
 
 	transitions, response, err := jiraClient.Issue.GetTransitions(spec.Issue.Key)
 	if err != nil {
-		if response != nil {
-			body, err := ioutil.ReadAll(response.Body)
-			if err != nil {
-				return err
-			}
-			return errors.New(string(body))
-		}
-		return err
-	}
-
-	if spec.Issue.Fields == nil {
-		return ErrNoIssueFieldsAreDefined
-	}
-	if spec.Issue.Fields.Status == nil {
-		return ErrNoIssueStatusFieldIsDefined
+		return handleResponseError(response.Response, err)
 	}
 
 	for _, transition := range transitions {
@@ -90,14 +89,7 @@ func TransitionIssue(spec Spec) error {
 
 			response, err := jiraClient.Issue.DoTransitionWithPayload(spec.Issue.Key, payload)
 			if err != nil {
-				if response != nil {
-					body, err := ioutil.ReadAll(response.Body)
-					if err != nil {
-						return err
-					}
-					return errors.New(string(body))
-				}
-				return err
+				return handleResponseError(response.Response, err)
 			}
 
 			return nil
@@ -105,4 +97,22 @@ func TransitionIssue(spec Spec) error {
 	}
 
 	return fmt.Errorf("transition %s is not applicable for issue %s", spec.Issue.Fields.Status.Name, spec.Issue.Key)
+}
+
+func handleResponseError(response *http.Response, err error) error {
+	if err != nil {
+		if response.StatusCode == http.StatusUnauthorized {
+			return ErrInvalidAuth
+		}
+		if response != nil {
+			body, err := ioutil.ReadAll(response.Body)
+			if err != nil {
+				return err
+			}
+			return errors.New(string(body))
+		}
+		return err
+	}
+
+	return nil
 }

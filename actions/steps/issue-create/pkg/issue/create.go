@@ -3,10 +3,16 @@ package issue
 import (
 	"errors"
 	"io/ioutil"
+	"net/http"
 
 	"github.com/andygrunwald/go-jira"
 	"github.com/mitchellh/mapstructure"
 	"github.com/trivago/tgo/tcontainer"
+)
+
+var (
+	ErrInvalidAuth             = errors.New("Invalid authentication")
+	ErrNoIssueFieldsAreDefined = errors.New("No issue fields are defined")
 )
 
 type ConnectionSpec struct {
@@ -41,6 +47,10 @@ type Spec struct {
 }
 
 func CreateIssue(spec Spec) (*jira.Issue, error) {
+	if spec.Issue == nil || spec.Issue.Fields == nil {
+		return nil, ErrNoIssueFieldsAreDefined
+	}
+
 	tp := jira.BasicAuthTransport{
 		Username: spec.Connection.Username,
 		Password: spec.Connection.Password,
@@ -68,15 +78,26 @@ func CreateIssue(spec Spec) (*jira.Issue, error) {
 
 	issue, response, err := jiraClient.Issue.Create(i)
 	if err != nil {
-		if response != nil {
-			body, err := ioutil.ReadAll(response.Body)
-			if err != nil {
-				return nil, err
-			}
-			return nil, errors.New(string(body))
-		}
-		return nil, err
+		return nil, handleResponseError(response.Response, err)
 	}
 
 	return issue, nil
+}
+
+func handleResponseError(response *http.Response, err error) error {
+	if err != nil {
+		if response.StatusCode == http.StatusUnauthorized {
+			return ErrInvalidAuth
+		}
+		if response != nil {
+			body, err := ioutil.ReadAll(response.Body)
+			if err != nil {
+				return err
+			}
+			return errors.New(string(body))
+		}
+		return err
+	}
+
+	return nil
 }

@@ -19,21 +19,25 @@ func TestTransitionIssueFromSpec(t *testing.T) {
 		Name          string
 		File          string
 		ExpectedError error
+		Reopen        bool
 	}{
 		{
 			Name:          "Jira Server Issue Transition: In Progress",
 			File:          "fixtures/jira-server-issue-transition-in-progress.yaml",
 			ExpectedError: nil,
+			Reopen:        true,
 		},
 		{
 			Name:          "Jira Server Issue Transition: Close, Won't Do",
 			File:          "fixtures/jira-server-issue-transition-close-won't-do.yaml",
 			ExpectedError: nil,
+			Reopen:        true,
 		},
 		{
 			Name:          "Jira Server Issue Transition: Invalid Status",
 			File:          "fixtures/jira-server-issue-transition-invalid-status.yaml",
 			ExpectedError: fmt.Errorf("transition %s is not applicable for issue %s", "Close", "RELAY-45"),
+			Reopen:        true,
 		},
 		{
 			Name:          "Jira Server Issue Transition: Fields Undefined",
@@ -41,9 +45,19 @@ func TestTransitionIssueFromSpec(t *testing.T) {
 			ExpectedError: issue.ErrNoIssueFieldsAreDefined,
 		},
 		{
-			Name:          "Jira Server Issue Transition: Status Field Undefined",
-			File:          "fixtures/jira-server-issue-transition-status-field-undefined.yaml",
+			Name:          "Jira Server Issue Transition: Issue Key Undefined",
+			File:          "fixtures/jira-server-issue-transition-issue-key-undefined.yaml",
+			ExpectedError: issue.ErrNoIssueKeyIsDefined,
+		},
+		{
+			Name:          "Jira Server Issue Transition: Issue Status Field Undefined",
+			File:          "fixtures/jira-server-issue-transition-issue-status-field-undefined.yaml",
 			ExpectedError: issue.ErrNoIssueStatusFieldIsDefined,
+		},
+		{
+			Name:          "Jira Server Invalid Auth",
+			File:          "fixtures/jira-server-invalid-auth.yaml",
+			ExpectedError: issue.ErrInvalidAuth,
 		},
 	}
 	for _, test := range tcs {
@@ -55,7 +69,9 @@ func TestTransitionIssueFromSpec(t *testing.T) {
 				panic(err)
 			}
 
-			reopen(spec)
+			if test.Reopen {
+				reopen(spec)
+			}
 
 			err := issue.TransitionIssue(spec)
 			require.Equal(t, test.ExpectedError, err)
