@@ -1,0 +1,12 @@
+connection:
+  url: <Jira server url>
+  username: <Jira server username>
+  password: <Jira server password>
+issue:
+  key:
+    RELAY-24
+  fields:
+    status:
+      name: Close Issue
+    resolution:
+      name: "Won't Do"

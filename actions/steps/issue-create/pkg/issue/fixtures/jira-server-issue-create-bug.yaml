@@ -1,0 +1,12 @@
+connection:
+  url: <Jira server url>
+  username: <Jira server username>
+  password: <Jira server password>
+issue:
+  fields:
+    description: Test bug
+    type:
+      name: Bug
+    project:
+      key: RELAY
+    summary: Test Bug

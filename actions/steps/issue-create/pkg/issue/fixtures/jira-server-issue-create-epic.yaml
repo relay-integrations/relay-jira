@@ -1,0 +1,14 @@
+connection:
+  url: <Jira server url>
+  username: <Jira server username>
+  password: <Jira server password>
+issue:
+  fields:
+    description: Test epic
+    type:
+      name: Epic
+    project:
+      key: RELAY
+    summary: Test Epic
+  customfields:
+    customfield_10011: Epic Name
