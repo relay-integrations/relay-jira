@@ -2,9 +2,15 @@ package issue
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 
 	"github.com/andygrunwald/go-jira"
+)
+
+var (
+	ErrNoIssueFieldsAreDefined     = errors.New("No issue fields are defined")
+	ErrNoIssueStatusFieldIsDefined = errors.New("No issue status field is defined")
 )
 
 type ConnectionSpec struct {
@@ -59,17 +65,27 @@ func TransitionIssue(spec Spec) error {
 		return err
 	}
 
+	if spec.Issue.Fields == nil {
+		return ErrNoIssueFieldsAreDefined
+	}
+	if spec.Issue.Fields.Status == nil {
+		return ErrNoIssueStatusFieldIsDefined
+	}
+
 	for _, transition := range transitions {
 		if transition.Name == spec.Issue.Fields.Status.Name {
 			payload := jira.CreateTransitionPayload{
 				Transition: jira.TransitionPayload{
 					ID: transition.ID,
 				},
-				Fields: jira.TransitionPayloadFields{
+			}
+
+			if spec.Issue.Fields.Resolution != nil {
+				payload.Fields = jira.TransitionPayloadFields{
 					Resolution: &jira.Resolution{
 						Name: spec.Issue.Fields.Resolution.Name,
 					},
-				},
+				}
 			}
 
 			response, err := jiraClient.Issue.DoTransitionWithPayload(spec.Issue.Key, payload)
@@ -84,9 +100,9 @@ func TransitionIssue(spec Spec) error {
 				return err
 			}
 
-			break
+			return nil
 		}
 	}
 
-	return nil
+	return fmt.Errorf("transition %s is not applicable for issue %s", spec.Issue.Fields.Status.Name, spec.Issue.Key)
 }

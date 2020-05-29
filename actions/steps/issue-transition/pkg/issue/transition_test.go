@@ -16,12 +16,34 @@ import (
 
 func TestTransitionIssueFromSpec(t *testing.T) {
 	tcs := []struct {
-		Name string
-		File string
+		Name          string
+		File          string
+		ExpectedError error
 	}{
 		{
-			Name: "Jira Server Issue Transition: Close, Won't Do",
-			File: "fixtures/jira-server-issue-transition-close-won't-do.yaml",
+			Name:          "Jira Server Issue Transition: In Progress",
+			File:          "fixtures/jira-server-issue-transition-in-progress.yaml",
+			ExpectedError: nil,
+		},
+		{
+			Name:          "Jira Server Issue Transition: Close, Won't Do",
+			File:          "fixtures/jira-server-issue-transition-close-won't-do.yaml",
+			ExpectedError: nil,
+		},
+		{
+			Name:          "Jira Server Issue Transition: Invalid Status",
+			File:          "fixtures/jira-server-issue-transition-invalid-status.yaml",
+			ExpectedError: fmt.Errorf("transition %s is not applicable for issue %s", "Close", "RELAY-45"),
+		},
+		{
+			Name:          "Jira Server Issue Transition: Fields Undefined",
+			File:          "fixtures/jira-server-issue-transition-fields-undefined.yaml",
+			ExpectedError: issue.ErrNoIssueFieldsAreDefined,
+		},
+		{
+			Name:          "Jira Server Issue Transition: Status Field Undefined",
+			File:          "fixtures/jira-server-issue-transition-status-field-undefined.yaml",
+			ExpectedError: issue.ErrNoIssueStatusFieldIsDefined,
 		},
 	}
 	for _, test := range tcs {
@@ -33,8 +55,10 @@ func TestTransitionIssueFromSpec(t *testing.T) {
 				panic(err)
 			}
 
+			reopen(spec)
+
 			err := issue.TransitionIssue(spec)
-			require.NoError(t, err)
+			require.Equal(t, test.ExpectedError, err)
 		})
 	}
 }
@@ -48,4 +72,20 @@ func getTestFixture(p string) []byte {
 	}
 
 	return []byte(os.ExpandEnv(string(content)))
+}
+
+func reopen(spec issue.Spec) {
+	reopen := issue.Spec{
+		Connection: spec.Connection,
+		Issue: &issue.IssueSpec{
+			Key: spec.Issue.Key,
+			Fields: &issue.IssueFieldsSpec{
+				Status: &issue.IssueStatusSpec{
+					Name: "Reopen Issue",
+				},
+			},
+		},
+	}
+
+	issue.TransitionIssue(reopen)
 }

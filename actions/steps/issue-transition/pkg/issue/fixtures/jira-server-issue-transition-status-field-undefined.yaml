@@ -6,7 +6,5 @@ issue:
   key:
     RELAY-45
   fields:
-    status:
-      name: Close Issue
     resolution:
-      name: "Won't Do"
+      name: Done
