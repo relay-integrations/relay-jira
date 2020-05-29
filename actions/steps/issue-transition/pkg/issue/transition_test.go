@@ -3,6 +3,7 @@ package issue_test
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path"
 	"path/filepath"
 	"runtime"
@@ -14,8 +15,6 @@ import (
 )
 
 func TestTransitionIssueFromSpec(t *testing.T) {
-	t.SkipNow()
-
 	tcs := []struct {
 		Name string
 		File string
@@ -48,5 +47,5 @@ func getTestFixture(p string) []byte {
 		panic(err)
 	}
 
-	return content
+	return []byte(os.ExpandEnv(string(content)))
 }
