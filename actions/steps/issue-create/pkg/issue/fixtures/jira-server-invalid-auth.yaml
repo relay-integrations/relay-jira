@@ -1,0 +1,8 @@
+connection:
+  url: ${RELAY_JIRA_SERVER_URL}
+issue:
+  key:
+    RELAY-45
+  fields:
+    status:
+      name: Start Progress

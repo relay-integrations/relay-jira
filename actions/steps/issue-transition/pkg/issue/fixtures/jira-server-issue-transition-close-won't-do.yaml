@@ -1,0 +1,12 @@
+connection:
+  url: ${RELAY_JIRA_SERVER_URL}
+  username: ${RELAY_JIRA_SERVER_USERNAME}
+  password: ${RELAY_JIRA_SERVER_PASSWORD}
+issue:
+  key:
+    RELAY-45
+  fields:
+    status:
+      name: Close Issue
+    resolution:
+      name: "Won't Do"

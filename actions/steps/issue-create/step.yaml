@@ -1,0 +1,11 @@
+apiVersion: integration/v1
+kind: Step
+name: jira-server-step-issue-create
+version: 1
+summary:
+  Create a Jira Server issue
+description: |
+  Creates a new Jira Server issue.
+build:
+  apiVersion: build/v1
+  kind: Docker
