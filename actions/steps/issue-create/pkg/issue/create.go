@@ -5,29 +5,41 @@ import (
 	"io/ioutil"
 
 	"github.com/andygrunwald/go-jira"
+	"github.com/mitchellh/mapstructure"
 	"github.com/trivago/tgo/tcontainer"
 )
 
-// ConnectionSpec represents the connection/authentication data
 type ConnectionSpec struct {
 	URL      string `spec:"url"`
 	Username string `spec:"username"`
 	Password string `spec:"password"`
 }
 
-// IssueSpec represents the issue data
+type ProjectSpec struct {
+	Key string `spec:"key"`
+}
+
+type IssueTypeSpec struct {
+	Name string `spec:"name"`
+}
+
+type IssueFieldsSpec struct {
+	Summary     string         `spec:"summary"`
+	Description string         `spec:"description"`
+	Type        *IssueTypeSpec `spec:"type"`
+	Project     *ProjectSpec   `spec:"project"`
+}
+
 type IssueSpec struct {
-	Fields       *jira.IssueFields
-	CustomFields *jira.CustomFields
+	Fields       *IssueFieldsSpec  `spec:"fields"`
+	CustomFields map[string]string `spec:"customFields"`
 }
 
-// Spec represents the encompassing specification structure
 type Spec struct {
-	Connection *ConnectionSpec
-	Issue      *IssueSpec
+	Connection *ConnectionSpec `spec:"connection"`
+	Issue      *IssueSpec      `spec:"issue"`
 }
 
-// CreateIssue creates a new Jira issue
 func CreateIssue(spec Spec) (*jira.Issue, error) {
 	tp := jira.BasicAuthTransport{
 		Username: spec.Connection.Username,
@@ -41,15 +53,17 @@ func CreateIssue(spec Spec) (*jira.Issue, error) {
 
 	cf := tcontainer.NewMarshalMap()
 	if spec.Issue.CustomFields != nil {
-		for name, value := range *spec.Issue.CustomFields {
+		for name, value := range spec.Issue.CustomFields {
 			cf[name] = value
 		}
 	}
 
-	spec.Issue.Fields.Unknowns = cf
+	f := &jira.IssueFields{}
+	mapstructure.Decode(spec.Issue.Fields, f)
 
+	f.Unknowns = cf
 	i := &jira.Issue{
-		Fields: spec.Issue.Fields,
+		Fields: f,
 	}
 
 	issue, response, err := jiraClient.Issue.Create(i)

@@ -1,10 +1,10 @@
 connection:
-  url: <Jira server url>
-  username: <Jira server username>
-  password: <Jira server password>
+  url: <Jira Server url>
+  username: <Jira Server username>
+  password: <Jira Server password>
 issue:
   key:
-    RELAY-24
+    RELAY-44
   fields:
     status:
       name: Close Issue

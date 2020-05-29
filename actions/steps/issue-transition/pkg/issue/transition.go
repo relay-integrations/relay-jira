@@ -7,27 +7,35 @@ import (
 	"github.com/andygrunwald/go-jira"
 )
 
-// ConnectionSpec represents the connection/authentication data
 type ConnectionSpec struct {
 	URL      string `spec:"url"`
 	Username string `spec:"username"`
 	Password string `spec:"password"`
 }
 
-// IssueSpec represents the issue data
+type IssueResolutionSpec struct {
+	Name string `spec:"name`
+}
+
+type IssueStatusSpec struct {
+	Name string `spec:"name`
+}
+
+type IssueFieldsSpec struct {
+	Status     *IssueStatusSpec     `spec:"status"`
+	Resolution *IssueResolutionSpec `spec:"resolution"`
+}
+
 type IssueSpec struct {
-	Key          string `spec:"key"`
-	Fields       *jira.IssueFields
-	CustomFields *jira.CustomFields
+	Key    string           `spec:"key"`
+	Fields *IssueFieldsSpec `spec:"fields"`
 }
 
-// Spec represents the encompassing specification structure
 type Spec struct {
-	Connection *ConnectionSpec
-	Issue      *IssueSpec
+	Connection *ConnectionSpec `spec:"connection"`
+	Issue      *IssueSpec      `spec:"issue"`
 }
 
-// TransitionIssue transitions a Jira issue to a specified status/resolution
 func TransitionIssue(spec Spec) error {
 	tp := jira.BasicAuthTransport{
 		Username: spec.Connection.Username,

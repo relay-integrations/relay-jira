@@ -16,32 +16,37 @@ import (
 func TestCreateIssueFromSpec(t *testing.T) {
 	t.SkipNow()
 
-	tt := []struct {
+	tcs := []struct {
+		Name string
 		File string
 	}{
 		{
+			Name: "Jira Server Issue Create: Bug",
 			File: "fixtures/jira-server-issue-create-bug.yaml",
 		},
 		{
+			Name: "Jira Server Issue Create: Epic",
 			File: "fixtures/jira-server-issue-create-epic.yaml",
 		},
 	}
-	for _, test := range tt {
-		content := getTestFixture(test.File)
+	for _, test := range tcs {
+		t.Run(fmt.Sprintf("%s", test.Name), func(t *testing.T) {
+			content := getTestFixture(test.File)
 
-		var spec issue.Spec
-		if err := yaml.Unmarshal(content, &spec); err != nil {
-			panic(err)
-		}
+			var spec issue.Spec
+			if err := yaml.Unmarshal(content, &spec); err != nil {
+				panic(err)
+			}
 
-		issue, err := issue.CreateIssue(spec)
-		require.NoError(t, err)
-		require.NotNil(t, issue)
-		require.NotEmpty(t, issue.Key)
+			issue, err := issue.CreateIssue(spec)
+			require.NoError(t, err)
+			require.NotNil(t, issue)
+			require.NotEmpty(t, issue.Key)
 
-		if issue != nil {
-			t.Log(fmt.Sprintf("Created issue %v", issue.Key))
-		}
+			if issue != nil {
+				t.Log(fmt.Sprintf("Created issue %v", issue.Key))
+			}
+		})
 	}
 }
 
