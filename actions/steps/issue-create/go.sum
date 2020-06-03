@@ -48,6 +48,8 @@ github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfU
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.3.1/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/golang/protobuf v1.3.2/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
+github.com/gomarkdown/markdown v0.0.0-20200513213024-62c5e2c608cc h1:T+Fwk3llJdUIQeBI8fC/ARqRD5mWy3AE5I6ZU3VkIw8=
+github.com/gomarkdown/markdown v0.0.0-20200513213024-62c5e2c608cc/go.mod h1:aii0r/K0ZnHv7G0KF7xy1v0A7s2Ljrb5byB7MO5p6TU=
 github.com/google/go-cmp v0.3.0/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMywk6iLU=
 github.com/google/go-cmp v0.3.1/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMywk6iLU=
 github.com/google/go-cmp v0.4.0 h1:xsAVV57WRhGj6kEIi8ReJzQlHHqcBYCElAvkovg3B/4=
@@ -116,6 +118,8 @@ github.com/puppetlabs/horsehead/v2 v2.7.0 h1:ue7bP92j8+ikdG4gg1ayx0BgrclLN5tmTMm
 github.com/puppetlabs/horsehead/v2 v2.7.0/go.mod h1:S2DMCdNIHfEBZmy463I8vpM3UUKuxau1JrMj6uIv1t8=
 github.com/puppetlabs/nebula-sdk v1.14.0 h1:QBe8OmglP9dwwriBVQIPkzkh0hV8UwG5Pq/LA6diZvg=
 github.com/puppetlabs/nebula-sdk v1.14.0/go.mod h1:w1VaKrNPTGooK1YDqQQWLUxGihC4YpemN4Rb627NAyU=
+github.com/puppetlabs/nebula-sdk v1.14.1 h1:H+tcqKkpPExd0dRqMPwEgz5RWv0eT6tOmYb16iKtHAY=
+github.com/puppetlabs/nebula-sdk v1.14.1/go.mod h1:hyfjrGSReyd3lk4/ehHV2+LgQuj0pvGiV6uFwVIcGW0=
 github.com/puppetlabs/paesslerag-gval v1.0.2-0.20191119012647-d2c694821b5b h1:L3KBXqsUZK0OsVAN6DQ99OzI18BvtP+uVtX0oTjCxhQ=
 github.com/puppetlabs/paesslerag-gval v1.0.2-0.20191119012647-d2c694821b5b/go.mod h1:+fTpFaf5D42b+LP12OkDl9tYbLdn36H+fvBauW4KIR4=
 github.com/puppetlabs/paesslerag-jsonpath v0.1.2-0.20200512062544-1e26d7ca225e h1:fWEPaND52rBrkqNIwEcNEdIE9Z42tPqrMaMdxM74QEM=
@@ -155,6 +159,7 @@ github.com/xeipuuv/gojsonschema v0.0.0-20171025060643-212d8a0df7ac/go.mod h1:5yf
 github.com/xeipuuv/gojsonschema v1.2.0/go.mod h1:anYRn/JVcOK2ZgGU+IjEV4nwlhoK5sQluxsYJ78Id3Y=
 github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77/go.mod h1:aYKd//L2LvnjZzWKhF00oedf4jCCReLcmhLdhm1A27Q=
 go.mongodb.org/mongo-driver v1.0.3/go.mod h1:u7ryQJ+DOzQmeO7zB6MHyr8jkEQvC8vH7qLUO4lqsUM=
+golang.org/dl v0.0.0-20190829154251-82a15e2f2ead/go.mod h1:IUMfjQLJQd4UTqG1Z90tenwKoCX93Gn3MAQJMOSBsDQ=
 golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20190426145343-a29dc8fdc734/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
