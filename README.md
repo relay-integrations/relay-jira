@@ -2,17 +2,11 @@
 
 Integration with Jira Server for Puppet Relay.
 
-## External requirements
+## Actions
 
-_TBD_
-
-## Getting started
-
-_TBD_
-
-## Examples
-
-_TBD_
+|   Type    |  Name              | Description          |
+|-----------|--------------------|----------------------|
+| Step      | [ec2-delete-key-pairs](/actions/steps/ec2-delete-key-pairs) |  
 
 ## Contributing
 
