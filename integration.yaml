@@ -1,15 +1,15 @@
 apiVersion: integration/v1
 kind: Integration
-name: jira-server
+name: jira
 channel: stable
 version: v20200408
-summary: Jira Server
+summary: Jira 
 description: |
-    Integration with Atlassian's Jira Server.
+    Integration with Atlassian's Jira.
 license: Apache-2.0
 owner:
   name: Puppet, Inc.
   email: relay@puppet.com
   url: https://puppet.com
-homepage: https://github.com/relay-integrations/relay-jira-server
-source: git://github.com/relay-integrations/relay-jira-server.git
+homepage: https://github.com/relay-integrations/relay-jira
+source: git://github.com/relay-integrations/relay-jira.git
