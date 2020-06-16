@@ -6,8 +6,8 @@ Integration with Jira Server for Puppet Relay.
 
 |   Type    |  Name              | Description          |
 |-----------|--------------------|----------------------|
-| Step      | [jira-server-issue-create](/steps/issue-create) | Create a Jira issue | 
-| Step      | [jira-server-issue-create](/steps/issue-transition) | Transition a Jira issue to new state | 
+| Step      | [jira-step-issue-create](/steps/jira-step-issue-create) | Create a Jira issue | 
+| Step      | [jira-step-issue-transition](/steps/jira-step-issue-transition) | Transition a Jira issue to new state | 
 | Trigger   | [jira-trigger-issue-created](/triggers/issue-created) | Triggers when a new issue is created |
 | Trigger   | [jira-trigger-issue-deleted](/triggers/issue-deleted) | Triggers when an issue is deleted |
 

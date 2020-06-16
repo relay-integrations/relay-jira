@@ -1,0 +1,11 @@
+apiVersion: integration/v1
+kind: Step
+name: jira-step-issue-transition
+version: 4
+summary:
+  Transition a Jira issue
+description: |
+  Transitions a Jira issue to a specified status.
+build:
+  apiVersion: build/v1
+  kind: Docker

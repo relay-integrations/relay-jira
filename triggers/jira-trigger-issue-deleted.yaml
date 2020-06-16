@@ -1,10 +1,10 @@
 apiVersion: integration/v1
 kind: Trigger
-name: issue-created
+name: jira-trigger-issue-deleted
 version: 1
-summary: Jira issue created
+summary: Jira issue deleted
 description: |
-  This trigger fires when a Jira issue is created.
+  This trigger fires when a Jira issue is deleted.
 
 responders:
 - webhook
