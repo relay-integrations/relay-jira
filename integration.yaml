@@ -3,7 +3,7 @@ kind: Integration
 name: jira
 channel: stable
 version: v20200408
-summary: Jira 
+summary: Jira
 description: |
     Integration with Atlassian's Jira.
 license: Apache-2.0
@@ -13,3 +13,5 @@ owner:
   url: https://puppet.com
 homepage: https://github.com/relay-integrations/relay-jira
 source: git://github.com/relay-integrations/relay-jira.git
+tags:
+  - collaboration
