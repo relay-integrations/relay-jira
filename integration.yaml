@@ -5,7 +5,7 @@ channel: stable
 version: v20200408
 summary: Jira
 description: |
-    Integration with Atlassian's Jira.
+    Jira is an issue tracking product developed by Atlassian that allows bug tracking and agile project management.
 license: Apache-2.0
 owner:
   name: Puppet, Inc.
