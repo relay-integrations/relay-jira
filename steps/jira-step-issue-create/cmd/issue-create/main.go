@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 
 	"github.com/puppetlabs/nebula-sdk/pkg/log"
+	"github.com/puppetlabs/nebula-sdk/pkg/outputs"
 	"github.com/puppetlabs/nebula-sdk/pkg/taskutil"
 	"github.com/relay-integrations/relay-jira-server/actions/steps/issue-create/pkg/issue"
 )
@@ -32,5 +34,13 @@ func main() {
 
 	if issue != nil {
 		log.Info(fmt.Sprintf("Created issue %v", issue.Key))
+	}
+
+	if client, err := outputs.NewDefaultOutputsClientFromNebulaEnv(); err != nil {
+		log.FatalE(err)
+	} else {
+		if err := client.SetOutput(context.Background(), "issue", issue.Key); err != nil {
+			log.FatalE(err)
+		}
 	}
 }
