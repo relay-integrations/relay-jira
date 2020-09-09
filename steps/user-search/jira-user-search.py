@@ -9,19 +9,15 @@ relay = Interface()
 # build up the request from workflow parameters
 url = relay.get(D.connection.url) + '/rest/api/3/user/search'
 
-auth_string = relay.get(D.connection.username) + ":" + relay.get(D.connection.password)
-
-auth_header = "Basic" + base64.b64encode(auth_string.encode())
-
 headers = {
-  'Authorization': "Basic " + auth_header,
   'Accept': 'application/json'
 }
 
+auth = [relay.get(D.connection.username), relay.get(D.connection.password)]
 user_email = relay.get(D.user_email)
 params = {'query': user_email }
 
-r = requests.get(url, headers=headers, params=params)
+r = requests.get(url, auth=auth, headers=headers, params=params)
 
 r.raise_for_status()
 
