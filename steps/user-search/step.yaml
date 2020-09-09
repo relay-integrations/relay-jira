@@ -1,0 +1,56 @@
+apiVersion: integration/v1
+kind: Step
+name: user-search
+version: 1
+summary: Search for a users ID given their email address
+description: This step translates a human user id to the corresponding internal ID, which can be used by subsequent steps like assigning issues
+
+build:
+  apiVersion: build/v1
+  kind: Docker
+
+publish:
+  repository: relaysh/jira-step-user-search
+
+examples:
+- summary: Find a userID and print it in a subsequent step
+  content:
+    apiVersion: v1
+    kind: Workflow
+    parameters:
+      userEmail:
+        description: the email address of the user to search for
+    steps:
+    - name: search-user-id
+      image: relaysh/jira-step-user-search
+      spec:
+        user_email: !Parameter userEmail
+        connection: !Connection { type: jira, name: my-jira-login }
+    - name: echo-output
+      image: relaysh/core
+      spec:
+        user_email: !Parameter userEmail
+        user_id: !Output [search-user-id, userID]
+      input:
+        - echo "Looked up $(ni get -p {.userEmail}) as id $(ni get -p {.userID})"
+schemas:
+  spec:
+    $schema: 'http://json-schema.org/draft-07/schema#'
+    type: object
+    properties:
+      userEmail:
+        type: string
+        description: The email address of the user to look up
+      connection:
+        type: object
+        x-relay-connectionType: jira
+        description: Relay Connection containing JIRA credentials
+    required: [userEmail, connection]
+  outputs:
+    $schema: 'http://json-schema.org/draft-07/schema#'
+    type: object
+    properties:
+      userID:
+        type: string
+        description: The internal JIRA user ID of the specified user, if found
+    required: [userID]
