@@ -13,11 +13,11 @@ headers = {
   'Accept': 'application/json'
 }
 
-auth = [relay.get(D.connection.username), relay.get(D.connection.password)]
 user_email = relay.get(D.user_email)
 params = {'query': user_email }
 
-r = requests.get(url, auth=auth, headers=headers, params=params)
+r = requests.get(url, headers=headers, params=params,
+  auth=(relay.get(D.connection.username),relay.get(D.connection.password)) )
 
 r.raise_for_status()
 
