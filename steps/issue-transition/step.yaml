@@ -1,6 +1,6 @@
 apiVersion: integration/v1
 kind: Step
-name: jira-step-issue-transition
+name: issue-transition
 version: 4
 summary:
   Transition a Jira issue
