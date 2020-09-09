@@ -29,11 +29,16 @@ type IssueTypeSpec struct {
 	Name string `spec:"name"`
 }
 
+type AssigneeSpec struct {
+	Name string `spec:"name"`
+}
+
 type IssueFieldsSpec struct {
 	Summary     string         `spec:"summary"`
 	Description string         `spec:"description"`
 	Type        *IssueTypeSpec `spec:"type"`
 	Project     *ProjectSpec   `spec:"project"`
+	Assignee    *AssigneeSpec  `spec:"assignee"`
 }
 
 type IssueSpec struct {
