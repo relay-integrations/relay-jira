@@ -1,6 +1,6 @@
 apiVersion: integration/v1
 kind: Step
-name: jira-step-issue-create
+name: issue-create
 version: 1
 summary:
   Create a Jira issue
