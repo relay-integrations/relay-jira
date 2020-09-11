@@ -11,3 +11,46 @@ build:
 
 publish:
   repository: relaysh/jira-step-user-search
+
+examples:
+- summary: Find a userid and print it in a subsequent step
+  content:
+    apiVersion: v1
+    kind: Workflow
+    parameters:
+      user_email:
+        description: the email address of the user to search for
+    steps:
+    - name: search-user-id
+      image: relaysh/jira-step-user-search
+      spec:
+        user_email: !Parameter user_email
+        connection: !Connection { type: jira, name: my-jira-login }
+    - name: echo-output
+      image: relaysh/core
+      spec:
+        user_email: !Parameter user_email
+        user_id: !Output [search-user-id, user_id]
+      input:
+        - echo "Looked up $(ni get -p {.user_email}) as id $(ni get -p {.user_id})"
+schemas:
+  spec:
+    $schema: 'http://json-schema.org/draft-07/schema#'
+    type: object
+    properties:
+      user_email:
+        type: string
+        description: The email address of the user to look up
+      connection:
+        type: object
+        x-relay-connectionType: jira
+        description: Relay Connection containing JIRA credentials
+    required: [user_email, connection]
+  outputs:
+    $schema: 'http://json-schema.org/draft-07/schema#'
+    type: object
+    properties:
+      user_id:
+        type: string
+        description: The internal JIRA user ID of the specified user, if found
+    required: [user_id]

@@ -1,0 +1,17 @@
+parameters:
+  user_email:
+    description: the email address of the user to search for
+
+steps:
+- name: search-user-id
+  image: relaysh/jira-step-user-search
+  spec:
+    user_email: !Parameter user_email
+    connection: !Connection { type: jira, name: my-jira-login }
+- name: echo-output
+  image: relaysh/core
+  spec:
+    user_email: !Parameter user_email
+    user_id: !Output [search-user-id, user_id]
+  input:
+    - echo "Looked up $(ni get -p {.user_email}) as id $(ni get -p {.user_id})"
