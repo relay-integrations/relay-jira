@@ -13,8 +13,8 @@ headers = {
   'Accept': 'application/json'
 }
 
-user_email = relay.get(D.user_email)
-params = {'query': user_email }
+userEmail = relay.get(D.userEmail)
+params = {'query': userEmail }
 
 r = requests.get(url, headers=headers, params=params,
   auth=(relay.get(D.connection.username),relay.get(D.connection.password)) )
@@ -30,12 +30,12 @@ user_id = 'not_found'
 
 # Caveat: the response will be an array of user objects, but
 # if there's >1 we have no idea which is correct. 
-user_id = response[0]['accountId']
+userID = response[0]['accountId']
 
-print('Matched ', user_email, ' to ', user_id)
+print('Matched ', userEmail, ' to ', userID)
 
-if user_id == 'not_found':
+if userID == 'not_found':
   print("Reached end of user list with no match")
   exit(1)
 else:
-  relay.outputs.set("user_id",user_id)
+  relay.outputs.set("userID",userID)
