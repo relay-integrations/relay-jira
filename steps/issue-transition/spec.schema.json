@@ -1,0 +1,81 @@
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "connection": {
+      "type": "object",
+      "x-relay-connection-type": "jira",
+      "description": "A Relay Jira connection to use",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Jira Server URL or Cloud URL"
+        },
+        "username": {
+          "type": "string",
+          "description": "Jira Server username or Cloud email"
+        },
+        "password": {
+          "type": "string",
+          "description": "Jira Server password or Cloud token"
+        }
+      },
+      "required": [
+        "url", 
+        "username", 
+        "password"
+      ]
+    },
+    "issue": {
+      "type": "object",
+      "description": "A mapping of the issue values",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The issue key, such as OPS-19"
+        },
+        "fields": {
+          "type": "object",
+          "description": "A mapping containing the fields for the transition",
+          "properties": {
+            "status": {
+              "type": "object",
+              "description": "A mapping containing the name of the new issue status",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Status name, such as In Progress or Closed"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "resolution": {
+              "type": "object",
+              "description": "A mapping containing the name of the new issue status resolution",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Resolution name, such as Fixed or Won't Fix"
+                }
+              }
+            }
+          },
+          "required": [
+            "status"
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "fields"
+      ]
+    }
+  },
+  "required": [
+    "issue"
+  ],
+  "additionalProperties": false
+}
