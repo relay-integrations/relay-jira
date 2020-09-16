@@ -1,0 +1,103 @@
+
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "connection": {
+      "type": "object",
+      "x-relay-connectionType": "jira",
+      "description": "A Relay Jira connection to use",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "Jira Server URL or Cloud URL"
+        },
+        "username": {
+          "type": "string",
+          "description": "Jira Server username or Cloud email"
+        },
+        "password": {
+          "type": "string",
+          "description": "Jira Server password or Cloud token"
+        }
+      },
+      "required": [
+        "url", 
+        "username", 
+        "password"
+      ]
+    },
+    "issue": {
+      "type": "object",
+      "description": "A mapping of the issue values",
+      "properties": {
+        "fields": {
+          "type": "object",
+          "description": "A mapping of the issue fields",
+          "properties": {
+            "summary": {
+              "type": "string",
+              "description": "A summary of the issue"
+            },
+            "description": {
+              "type": "string",
+              "description": "A description of the issue"
+            },
+            "type": {
+              "type": "object",
+              "description": "A mapping containing the name of the issue type",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of an issue type, such as Story or Bug"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            },
+            "assignee": {
+              "type": "object",
+              "description": "A mapping containing the name of the assignee",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of an assignee within jira"
+                }
+              }
+            },
+            "project": {
+              "type": "object",
+              "description": "A mapping containing the issue project key",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "description": "The project key for the new issue, such as OPS"
+                }
+              },
+              "required": [
+                "key"
+              ]
+            }
+          },
+          "required": [
+            "summary", 
+            "type",
+            "project"
+          ]
+        },
+        "customFields": {
+          "type": "object",
+          "description": "An arbitrary mapping of any custom field keys and values"
+        }
+      },
+      "required": [
+        "fields"
+      ]
+    }
+  },
+  "required": [
+    "issue"
+  ],
+  "additionalProperties": false
+}
