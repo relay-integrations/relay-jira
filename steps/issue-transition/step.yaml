@@ -11,7 +11,7 @@ build:
   kind: Docker
 publish:
   repository: relaysh/jira-step-issue-transition
-schema:
+schemas:
   spec:
     source: file
     file: spec.schema.json
