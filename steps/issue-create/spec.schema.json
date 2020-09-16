@@ -5,7 +5,7 @@
   "properties": {
     "connection": {
       "type": "object",
-      "x-relay-connection-type": "jira",
+      "x-relay-connectionType": "jira",
       "description": "A Relay Jira connection to use",
       "properties": {
         "url": {
