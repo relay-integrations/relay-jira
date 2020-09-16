@@ -11,3 +11,10 @@ build:
   kind: Docker
 publish:
   repository: relaysh/jira-step-issue-create
+schema: 
+  spec: 
+    source: file
+    file: spec.schema.json
+  outputs: 
+    source: file
+    file: outputs.schema.json
