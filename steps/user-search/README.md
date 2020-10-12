@@ -8,25 +8,3 @@ It requires a `jira` connection type. Workflows should provide the following par
 
 * `userEmail`: (string) the user's email address to search for
 
-
-Example usage:
-
-```yaml
-parameters:
-  userEmail:
-    description: the email address of the user to search for
-
-steps:
-- name: search-user-id
-  image: relaysh/jira-step-user-search
-  spec:
-    user_email: !Parameter userEmail
-    connection: !Connection { type: jira, name: my-jira-login }
-- name: echo-output
-  image: relaysh/core
-  spec:
-    user_email: !Parameter userEmail
-    user_id: !Output [search-user-id, userID]
-  input:
-    - echo "Looked up $(ni get -p {.userEmail}) as id $(ni get -p {.userID})"
-```
