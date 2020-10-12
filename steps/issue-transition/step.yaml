@@ -28,6 +28,6 @@ examples:
         key: !Parameter jiraIssueKey
         fields:
           status:
-            name: Resolved # Update with your Status
+            name: !Parameter jiraIssueStatus # Example: Resolved
           resolution:
-            name: Fixed # UPdate with your Resolution
+            name: !Parameter jiraIssueResolution # Example: Fixed
