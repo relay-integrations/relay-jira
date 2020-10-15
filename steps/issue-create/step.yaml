@@ -18,3 +18,20 @@ schemas:
   outputs: 
     source: file
     file: outputs.schema.json
+examples:
+- summary: Create an issue
+  content:
+    apiVersion: v1
+    kind: Step
+    name: create-jira-issue
+    image: relaysh/jira-step-issue-create
+    spec:
+      connection: !Connection { type: jira, name: jira-bot }
+      issue:
+        fields:
+          project:
+            key: !Parameter jiraProjectKey
+          type:
+            name: Task
+          summary: !Parameter issueTitle
+          description: !Fn.convertMarkdown [jira, !Parameter issueBody]

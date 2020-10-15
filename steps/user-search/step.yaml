@@ -13,6 +13,15 @@ publish:
   repository: relaysh/jira-step-user-search
 
 examples:
+- summary: Find a user by ID
+  content:
+    apiVersion: v1
+    kind: Step
+    name: search-user-id
+    image: relaysh/jira-step-user-search
+    spec:
+      user_email: !Parameter userEmail
+      connection: !Connection { type: jira, name: my-jira-login }
 - summary: Find a userID and print it in a subsequent step
   content:
     apiVersion: v1
