@@ -19,16 +19,3 @@ This [Atlassian Jira](https://www.atlassian.com/software/jira) trigger fires whe
 - Toggle the box for "Issue: Created" to configure the webhook to trigger when issues are created.
 
 ![Configuring new webhook in Jira](../../media/configure-trigger.gif)
-
-## Data Emitted 
-
-| Name | Data type | Description | 
-|------|-----------|-------------|
-| `key` | string | issue key | 
-| `type` | string | issue type | 
-| `project` | string | issue project | 
-| `priority` | string | issue priority | 
-| `summary` | string | issue summary |
-| `description` | string | description of the issue | 
-| `reporter` | string | reporter of the issue |
-| `issue` | mapping | raw issue output | 
