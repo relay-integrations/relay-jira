@@ -19,3 +19,21 @@ build:
 
 publish:
   repository: relaysh/jira-trigger-issue-created
+
+examples:
+- summary: When a Jira ticket is created
+  content:
+    apiVersion: 1
+    kind: Trigger
+    name: jira-issue-created
+    source:
+      type: webhook
+      image: relaysh/jira-trigger-issue-created
+    binding:
+      parameters:
+        key: !Data key
+        type: !Data type
+        project: !Data project
+        priority: !Data priority
+        summary: !Data summary
+        description: !Data description

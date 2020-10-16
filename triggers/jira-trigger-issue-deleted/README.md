@@ -15,37 +15,6 @@ This [Atlassian Jira](https://www.atlassian.com/software/jira) trigger fires whe
 | `reporter` | string | reporter of the issue |
 | `issue` | mapping | raw issue output | 
 
-## Example Trigger
-
-```
-parameters:
-  key:
-    default: ""
-  type:
-    default: ""
-  project:
-    default: ""
-  priority:
-    default: ""  
-  summary:
-    default: ""
-  description:
-    default: ""
-triggers:
-- name: jira-issue-deleted
-  source:
-    type: webhook
-    image: relaysh/jira-trigger-issue-deleted:latest
-  binding:
-    parameters:
-      key: !Data key
-      type: !Data type
-      project: !Data project
-      priority: !Data priority
-      summary: !Data summary
-      description: !Data description
-```
-
 ## Example Raw Data 
 
 ```
