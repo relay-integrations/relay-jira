@@ -24,7 +24,7 @@ publish:
 examples:
 - summary: When a Jira ticket is created
   content:
-    apiVersion: 1
+    apiVersion: v1
     kind: Trigger
     name: jira-issue-deleted
     source:
