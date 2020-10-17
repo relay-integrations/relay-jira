@@ -16,6 +16,6 @@ This [Atlassian Jira](https://www.atlassian.com/software/jira) trigger fires whe
 ### Step 2: Configure the webhook 
 - Name your trigger (e.g. "relay")
 - Copy the Webhook URL from your Relay workflow and paste it in the URL field.
-- Toggle the box for "Issue: Deleted" to configure the webhook to trigger when issues are created.
+- Toggle the box for "Issue: Deleted" to configure the webhook to trigger when issues are deleted.
 
 ![Configuring new webhook in Jira](../../media/configure-trigger.gif)
