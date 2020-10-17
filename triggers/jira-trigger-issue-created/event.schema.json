@@ -1,0 +1,50 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "description": "issue key"
+      },
+      "type": {
+        "type": "string",
+        "description": "issue type"
+      },
+      "project": {
+        "type": "string",
+        "description": "issue project"
+      },
+      "priority": {
+        "type": "string",
+        "description": "issue priority"
+      },
+      "summary": {
+        "type": "string",
+        "description": "issue summary"
+      },
+      "description": {
+        "type": "string",
+        "description": "issue description"
+      },
+      "reporter": {
+        "type": "string",
+        "description": "issue reporter"
+      },
+      "issue": {
+        "type": "object",
+        "description": "raw issue output"
+      }
+    },
+    "required": [
+      "key",
+      "type",
+      "project",
+      "priority",
+      "summary",
+      "description",
+      "reporter",
+      "issue"
+    ],
+    "additionalProperties": false
+  }
+  
