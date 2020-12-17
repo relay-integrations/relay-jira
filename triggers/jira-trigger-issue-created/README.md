@@ -11,11 +11,7 @@ This [Atlassian Jira](https://www.atlassian.com/software/jira) trigger fires whe
 - Select "Webhooks" from the Advanced Section. 
 - Click "Create a Webhook" 
 
-![Setting up new webhook in Jira](../../media/jira-webhook.gif)
-
 ### Step 2: Configure the webhook 
 - Name your trigger (e.g. "relay")
 - Copy the Webhook URL from your Relay workflow and paste it in the URL field.
 - Toggle the box for "Issue: Created" to configure the webhook to trigger when issues are created.
-
-![Configuring new webhook in Jira](../../media/configure-trigger.gif)
