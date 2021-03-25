@@ -1,9 +1,0 @@
-apiVersion: container/v1
-kind: StepContainer
-name: jira-server-step-issue-transition
-inherit: {from: sdk, name: go.v1}
-title: Transition a Jira Server issue
-description: >
-  Transitions a Jira Server issue to a specified status.
-settings:
-  CommandPath: cmd/issue-transition

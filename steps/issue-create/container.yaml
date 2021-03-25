@@ -1,9 +1,0 @@
-apiVersion: container/v1
-kind: StepContainer
-name: jira-server-step-issue-create
-inherit: {from: sdk, name: go.v1}
-title: Create a Jira Server issue
-description: >
-  Creates a new Jira Server issue.
-settings:
-  CommandPath: cmd/issue-create

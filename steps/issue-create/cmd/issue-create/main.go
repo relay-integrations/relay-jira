@@ -5,9 +5,9 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/puppetlabs/nebula-sdk/pkg/log"
-	"github.com/puppetlabs/nebula-sdk/pkg/outputs"
-	"github.com/puppetlabs/nebula-sdk/pkg/taskutil"
+	"github.com/puppetlabs/relay-sdk-go/pkg/log"
+	"github.com/puppetlabs/relay-sdk-go/pkg/outputs"
+	"github.com/puppetlabs/relay-sdk-go/pkg/taskutil"
 	"github.com/relay-integrations/relay-jira-server/actions/steps/issue-create/pkg/issue"
 )
 
