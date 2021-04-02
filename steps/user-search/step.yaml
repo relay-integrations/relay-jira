@@ -3,7 +3,7 @@ kind: Step
 name: user-search
 version: 1
 summary: Search for a users ID given their email address
-description: This step translates a human user id to the corresponding internal ID, which can be used by subsequent steps like assigning issues
+description: Translates a human user id to the corresponding internal ID, which can be used by subsequent steps like assigning issues.
 
 build:
   apiVersion: build/v1
