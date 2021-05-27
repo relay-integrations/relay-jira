@@ -1,21 +1,21 @@
 # jira-trigger-issue-deleted
 
-This [Atlassian Jira](https://www.atlassian.com/software/jira) trigger fires when a new issue is deleted. 
+This [Atlassian Jira](https://www.atlassian.com/software/jira) trigger fires when a new issue is deleted.
 
-## Setup Instructions 
+## Setup Instructions
 
 **NOTE: Configuring webhooks requires Jira administrator privileges**
 
 ### Step 1: Create new webhook
-- Navigate to your System Settings in your Jira console 
-- Select "Webhooks" from the Advanced Section. 
-- Click "Create a Webhook" 
+- Navigate to your System Settings in your Jira console
+- Select "Webhooks" from the Advanced Section.
+- Click "Create a Webhook"
 
-![Setting up new webhook in Jira](../../media/jira-webhook.gif)
+![Setting up new webhook in Jira](/media/jira-webhook.gif)
 
-### Step 2: Configure the webhook 
+### Step 2: Configure the webhook
 - Name your trigger (e.g. "relay")
 - Copy the Webhook URL from your Relay workflow and paste it in the URL field.
 - Toggle the box for "Issue: Deleted" to configure the webhook to trigger when issues are deleted.
 
-![Configuring new webhook in Jira](../../media/configure-trigger.gif)
+![Configuring new webhook in Jira](/media/configure-trigger.gif)
