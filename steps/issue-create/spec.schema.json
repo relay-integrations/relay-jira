@@ -66,6 +66,13 @@
                 }
               }
             },
+            "labels": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "A list of labels for the jira ticket"
+            },
             "project": {
               "type": "object",
               "description": "A mapping containing the issue project key",

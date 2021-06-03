@@ -36,6 +36,7 @@ type AssigneeSpec struct {
 type IssueFieldsSpec struct {
 	Summary     string         `spec:"summary"`
 	Description string         `spec:"description"`
+	Labels      []string       `spec:"labels"`
 	Type        *IssueTypeSpec `spec:"type"`
 	Project     *ProjectSpec   `spec:"project"`
 	Assignee    *AssigneeSpec  `spec:"assignee"`
